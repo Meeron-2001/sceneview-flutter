@@ -1,23 +1,21 @@
-group 'io.github.sceneview.sceneview_flutter'
+group 'io.carius.lars.sceneview_flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.9.0'
+    ext.kotlin_version = '1.9.24' // Latest Kotlin version as of March 2025
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.3'
+        classpath 'com.android.tools.build:gradle:8.7.0' // Match your project's AGP version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-allprojects {
+rootProject.allprojects {
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
     }
@@ -27,27 +25,21 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 34
-    namespace 'io.github.sceneview.sceneview_flutter'
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    compileSdk 35 // Match your project's compileSdk
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+    namespace 'io.carius.lars.sceneview_flutter' // Added namespace
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
-        minSdkVersion 28
+        minSdk 24 // ARCore requires at least API 24
+        targetSdk 35 // Match your project's targetSdk
     }
 }
 
 dependencies {
-    implementation 'io.github.sceneview:arsceneview:1.2.3'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // Updated to JDK 8
+    implementation 'com.google.ar:core:1.44.0' // Ensure ARCore dependency is included
 }
